@@ -139,6 +139,7 @@ docker logs oauth2-proxy
 4. **Certificate errors**: Check `TRAEFIK_CERTRESOLVER` is correct
 5. **"Email isn't verified" error**: Set `OAUTH2_PROXY_INSECURE_OIDC_ALLOW_UNVERIFIED_EMAIL=true` if your OIDC provider doesn't verify emails or you don't need this check
 6. **Authentication works but doesn't redirect back**: Set `OAUTH2_PROXY_WHITELIST_DOMAINS=.yourdomain.com` to allow redirects to protected services
+7. **"CSRF cookie not found" error**: Change `OAUTH2_PROXY_COOKIE_SAMESITE=lax` (instead of `strict`) to allow cookies during OAuth redirects between subdomains
 
 ## Security Notes
 
