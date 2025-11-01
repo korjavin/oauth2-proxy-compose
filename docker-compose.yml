@@ -46,8 +46,21 @@ services:
 
       # --- Error Middleware for Auto-Redirect (Traefik v3 feature) ---
       - "traefik.http.middlewares.auth-errors.errors.status=401-403"
-      - "traefik.http.middlewares.auth-errors.errors.service=oauth@docker"
-      - "traefik.http.middlewares.auth-errors.errors.query=/oauth2/start?rd={url}"
+      - "traefik.http.middlewares.auth-errors.errors.service=auth-error-page@docker"
+      - "traefik.http.middlewares.auth-errors.errors.query=/?url={url}"
+
+  auth-error-page:
+    image: nginx:alpine
+    container_name: ${ERROR_PAGE_CONTAINER_NAME:-auth-error-page}
+    restart: unless-stopped
+    networks:
+      - proxy-network
+    volumes:
+      - ./error-page/index.html:/usr/share/nginx/html/index.html:ro
+      - ./error-page/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.auth-error-page.loadbalancer.server.port=80"
 
 networks:
   proxy-network:
