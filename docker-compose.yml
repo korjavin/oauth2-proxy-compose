@@ -6,7 +6,7 @@ services:
     container_name: ${CONTAINER_NAME:-oauth2-proxy}
     restart: unless-stopped
     networks:
-      - ${NETWORK_NAME}
+      - proxy-network
     environment:
       # --- OIDC Provider Config ---
       OAUTH2_PROXY_PROVIDER: "${OAUTH2_PROXY_PROVIDER}"
@@ -49,5 +49,6 @@ services:
       - "traefik.http.services.oauth-signin.loadbalancer.server.port=${OAUTH2_PROXY_PORT:-4180}"
 
 networks:
-  ${NETWORK_NAME}:
+  proxy-network:
     external: true
+    name: ${NETWORK_NAME:-traefik-net}
