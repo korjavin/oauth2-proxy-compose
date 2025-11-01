@@ -64,6 +64,7 @@ OAUTH2_PROXY_CLIENT_SECRET=your-client-secret-from-pocket-id
 OAUTH2_PROXY_COOKIE_SECRET=your-generated-32-byte-secret
 OAUTH2_PROXY_COOKIE_DOMAIN=.yourdomain.com
 OAUTH2_PROXY_REDIRECT_URL=https://auth.yourdomain.com/oauth2/callback
+OAUTH2_PROXY_WHITELIST_DOMAINS=.yourdomain.com
 OAUTH_HOST=auth.yourdomain.com
 TRAEFIK_CERTRESOLVER=myresolver
 ```
@@ -101,6 +102,7 @@ Click **Deploy the stack**
 | `OAUTH2_PROXY_COOKIE_SECRET` | Random 32-byte secret (base64 encoded) | Generated value |
 | `OAUTH2_PROXY_COOKIE_DOMAIN` | Cookie domain (note the leading dot!) | `.yourdomain.com` |
 | `OAUTH2_PROXY_REDIRECT_URL` | OAuth callback URL | `https://auth.yourdomain.com/oauth2/callback` |
+| `OAUTH2_PROXY_WHITELIST_DOMAINS` | Allowed redirect domains (note the leading dot!) | `.yourdomain.com` |
 | `OAUTH_HOST` | Hostname for oauth2-proxy UI | `auth.yourdomain.com` |
 | `TRAEFIK_CERTRESOLVER` | Traefik certificate resolver name | `myresolver` |
 
@@ -136,6 +138,7 @@ docker logs oauth2-proxy
 3. **Network errors**: Ensure the `NETWORK_NAME` matches your Traefik network exactly
 4. **Certificate errors**: Check `TRAEFIK_CERTRESOLVER` is correct
 5. **"Email isn't verified" error**: Set `OAUTH2_PROXY_INSECURE_OIDC_ALLOW_UNVERIFIED_EMAIL=true` if your OIDC provider doesn't verify emails or you don't need this check
+6. **Authentication works but doesn't redirect back**: Set `OAUTH2_PROXY_WHITELIST_DOMAINS=.yourdomain.com` to allow redirects to protected services
 
 ## Security Notes
 
