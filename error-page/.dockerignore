@@ -1,0 +1,10 @@
+# Git files
+.git
+.gitignore
+
+# Documentation
+*.md
+
+# Build artifacts
+Dockerfile
+.dockerignore
