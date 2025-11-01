@@ -73,6 +73,7 @@ TRAEFIK_CERTRESOLVER=myresolver
 ```
 OAUTH2_PROXY_IMAGE=quay.io/oauth2-proxy/oauth2-proxy:latest
 CONTAINER_NAME=oauth2-proxy
+OAUTH2_PROXY_INSECURE_OIDC_ALLOW_UNVERIFIED_EMAIL=true
 OAUTH2_PROXY_COOKIE_SECURE=true
 OAUTH2_PROXY_COOKIE_SAMESITE=strict
 OAUTH2_PROXY_HTTP_ADDRESS=0.0.0.0:4180
@@ -81,7 +82,6 @@ OAUTH2_PROXY_EMAIL_DOMAINS=*
 OAUTH2_PROXY_UPSTREAMS=static://200
 TRAEFIK_ENTRYPOINT=websecure
 MIDDLEWARE_NAME=forward-auth
-ERROR_MIDDLEWARE_NAME=auth-error-page
 ```
 
 ### 5. Deploy
@@ -135,6 +135,7 @@ docker logs oauth2-proxy
 2. **Redirect loop**: Verify `OAUTH2_PROXY_REDIRECT_URL` matches your Pocket-ID client configuration
 3. **Network errors**: Ensure the `NETWORK_NAME` matches your Traefik network exactly
 4. **Certificate errors**: Check `TRAEFIK_CERTRESOLVER` is correct
+5. **"Email isn't verified" error**: Set `OAUTH2_PROXY_INSECURE_OIDC_ALLOW_UNVERIFIED_EMAIL=true` if your OIDC provider doesn't verify emails or you don't need this check
 
 ## Security Notes
 
