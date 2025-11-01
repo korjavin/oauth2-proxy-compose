@@ -110,14 +110,16 @@ All optional variables have sensible defaults. See `.env.example` for the comple
 
 ## Using Forward Auth with Other Services
 
-Once deployed, you can protect any service with oauth2-proxy by adding these labels to your service:
+Once deployed, you can protect any service with oauth2-proxy by adding this label to your service:
 
 ```yaml
 labels:
-  - "traefik.http.routers.myapp.middlewares=forward-auth@docker,auth-error-page@docker"
+  - "traefik.http.routers.myapp.middlewares=forward-auth@docker"
 ```
 
-Replace `myapp` with your router name. The middleware names (`forward-auth`, `auth-error-page`) can be customized via `MIDDLEWARE_NAME` and `ERROR_MIDDLEWARE_NAME` environment variables.
+Replace `myapp` with your router name. The middleware name (`forward-auth`) can be customized via the `MIDDLEWARE_NAME` environment variable.
+
+**Note**: When a user tries to access a protected service without authentication, oauth2-proxy will automatically redirect them to the sign-in page and back after successful authentication.
 
 ## Troubleshooting
 

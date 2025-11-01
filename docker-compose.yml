@@ -41,14 +41,6 @@ services:
       - "traefik.http.middlewares.${MIDDLEWARE_NAME:-forward-auth}.forwardauth.trustForwardHeader=true"
       - "traefik.http.middlewares.${MIDDLEWARE_NAME:-forward-auth}.forwardauth.authResponseHeaders=X-Forwarded-User, X-Forwarded-Email"
 
-      # --- Error Page MIDDLEWARE ---
-      - "traefik.http.middlewares.${ERROR_MIDDLEWARE_NAME:-auth-error-page}.errors.status=401,403"
-      - "traefik.http.middlewares.${ERROR_MIDDLEWARE_NAME:-auth-error-page}.errors.service=oauth-signin"
-      - "traefik.http.middlewares.${ERROR_MIDDLEWARE_NAME:-auth-error-page}.errors.query=/oauth2/sign_in?rd={scheme}://{host}{path}"
-
-      # --- Internal service for error page ---
-      - "traefik.http.services.oauth-signin.loadbalancer.server.port=${OAUTH2_PROXY_PORT:-4180}"
-
 networks:
   proxy-network:
     external: true
