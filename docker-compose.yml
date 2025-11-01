@@ -46,7 +46,7 @@ services:
 
       # --- Error Middleware for Auto-Redirect (Traefik v3 feature) ---
       - "traefik.http.middlewares.auth-errors.errors.status=401-403"
-      - "traefik.http.middlewares.auth-errors.errors.service=oauth"
+      - "traefik.http.middlewares.auth-errors.errors.service=oauth@docker"
       - "traefik.http.middlewares.auth-errors.errors.query=/oauth2/start?rd={url}"
 
 networks:
