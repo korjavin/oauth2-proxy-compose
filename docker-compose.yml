@@ -33,6 +33,7 @@ services:
       - "traefik.http.routers.oauth.rule=Host(`${OAUTH_HOST}`)"
       - "traefik.http.routers.oauth.entrypoints=${TRAEFIK_ENTRYPOINT:-websecure}"
       - "traefik.http.routers.oauth.tls.certresolver=${TRAEFIK_CERTRESOLVER}"
+      - "traefik.http.routers.oauth.service=oauth"
       - "traefik.http.services.oauth.loadbalancer.server.port=${OAUTH2_PROXY_PORT:-4180}"
 
       # --- Forward Auth MIDDLEWARE ---
