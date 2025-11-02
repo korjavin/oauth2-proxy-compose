@@ -55,7 +55,7 @@ services:
       - "traefik.http.middlewares.auth-errors.errors.query=/?url={url}"
 
   auth-error-page:
-    image: ghcr.io/korjavin/oauth2-proxy-error-page:latest
+    image: ghcr.io/korjavin/oauth2-proxy-error-page:f8957f5a56bde11e94a2084bb327b05b331ead7d
     container_name: ${ERROR_PAGE_CONTAINER_NAME:-auth-error-page}
     restart: unless-stopped
     networks:
