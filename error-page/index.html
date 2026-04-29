@@ -88,7 +88,7 @@
         }
 
         // Build the oauth2-proxy sign-in URL with redirect
-        const oauthUrl = 'https://oauth.kfamcloud.com/oauth2/start?rd=' + encodeURIComponent(redirectBackUrl);
+        const oauthUrl = '__OAUTH_BASE_URL__/oauth2/start?rd=' + encodeURIComponent(redirectBackUrl);
 
         // Set manual link
         document.getElementById('manualLink').href = oauthUrl;

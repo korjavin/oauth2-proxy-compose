@@ -50,7 +50,7 @@ networks:
 | Placeholder | Replace With | Example |
 |-------------|--------------|---------|
 | `myapp` | Your service/router name | `gitea`, `nextcloud`, `portainer` |
-| `myapp.yourdomain.com` | Your domain/subdomain | `git.kfamcloud.com` |
+| `myapp.yourdomain.com` | Your domain/subdomain | `git.yourdomain.com` |
 | `8080` | Port your app listens on | `3000`, `80`, `9000` |
 | `myapp_default` | Your service's network name (if it has one) | `gitea_default` |
 
@@ -97,7 +97,7 @@ services:
       - portainer_data:/data
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.portainer.rule=Host(`portainer.kfamcloud.com`)"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.yourdomain.com`)"
       - "traefik.http.routers.portainer.entrypoints=websecure"
       - "traefik.http.routers.portainer.tls.certresolver=myresolver"
       - "traefik.http.services.portainer.loadbalancer.server.port=9000"

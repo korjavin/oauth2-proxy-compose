@@ -4,12 +4,13 @@ FROM nginx:alpine
 # Add build argument for commit SHA
 ARG COMMIT_SHA=unknown
 
-# Copy error page files
-COPY index.html /usr/share/nginx/html/index.html
+# index.html is a template; rendered at container start with OAUTH_BASE_URL substituted in.
+COPY index.html /usr/share/nginx/html/index.html.template
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY docker-entrypoint.d/10-render-index.sh /docker-entrypoint.d/10-render-index.sh
 
-# Add commit SHA to HTML for version tracking (as HTML comment)
-RUN sed -i "s|</body>|<!-- Version: ${COMMIT_SHA} -->\n</body>|g" /usr/share/nginx/html/index.html
+RUN chmod +x /docker-entrypoint.d/10-render-index.sh && \
+    sed -i "s|</body>|<!-- Version: ${COMMIT_SHA} -->\n</body>|g" /usr/share/nginx/html/index.html.template
 
 # Expose port 80
 EXPOSE 80
